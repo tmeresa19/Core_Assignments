@@ -1,0 +1,16 @@
+
+h1 {
+    text-align: center;
+}
+
+/* ==========Style to create a square shaped boxes============== */
+.box {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    /* margin: 50px; */
+    margin-left: 100px;
+    border: solid;
+    align-items: center;
+}
+
