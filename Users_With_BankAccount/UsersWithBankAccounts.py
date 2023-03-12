@@ -27,35 +27,41 @@ class BankAccount:
         
 #===========================Users with Bank Accounts===========================
 
+# =======================use package to differenciate different classes instead of putting diffeent classes in the same file=============
+
 class User:
     def __init__(self, name, email):
         self.name = name
         self.email = email
         self.accounts = []
 
+# 
     def add_account(self, balance=0, interest_rate=0.02):
         account = BankAccount(balance, interest_rate)
         self.accounts.append(account)
         return account
 
+# 
     def make_deposit(self, account_index, amount):
         account = self.accounts[account_index]
         account.deposit(amount)
 
+# 
     def make_withdrawal(self, account_index, amount):
         account = self.accounts[account_index]
         account.withdraw(amount)
 
+# 
     def display_user_balance(self, account_index):
         account = self.accounts[account_index]
         account.display_account_info()
 
-
+# 
 user = User("John", "john@domain.com")
 account1 = user.add_account(balance=1000)
-user.make_withdrawal(1, 100)
 account2 = user.add_account(balance=500)
 
+# 
 user.make_deposit(0, 200)
 user.make_withdrawal(1, 100)
 user.display_user_balance(0)
