@@ -24,7 +24,7 @@ def create_user():
         user_id = User.create_one( new_user )
         session[ 'full_name' ] = f"{request.form['first_name']} {request.form['last_name']}" 
         session[ 'user_id' ] = user_id
-        return redirect( "/recipes" )
+        return redirect( "/dashboard" )
     else:
         return redirect( "/" ) 
     
@@ -39,12 +39,22 @@ def user_login():
         if User.validate_password( request.form["password_login"], current_user.password, bcrypt ) == True:
             session[ 'full_name' ] = f"{current_user.first_name} {current_user.last_name}" 
             session[ 'user_id' ] = current_user.id
-            return redirect( "/recipes" )
+            return redirect( "/dashboard" )
         else:
             return redirect( "/" )
     else:
         return redirect( "/" )
-    
+  
+
+@app.route("/dashboard", methods=["GET"])
+def home_page():
+    return render_template("home.html")
+
+@app.route("/dashboard", methods=["POST"])
+def home_page1():
+    return redirect("/dashboard")
+
+
 @app.route("/logout", methods=["POST"])
 def logout():
     session.clear()

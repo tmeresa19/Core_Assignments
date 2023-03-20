@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app import DATABASE, EMAIL_REGEX
-from flask_app.models import recipes_model
+
 from flask import flash
 
 
@@ -14,16 +14,6 @@ class User:
         self.email = data["email"]
         self.password = data["password"]
         self.recipe_list = []
-
-    @classmethod
-    def get_one_with_recipes(cls, data):
-        query = "SELECT * "
-        query += "FROM users u "
-        query += "LEFT JOIN recipes r ON u.id = r.user_id "
-        query += "WHERE u.id = %(id)s;"
-
-        results = connectToMySQL(DATABASE).query_db(query, data)
-        current_user = cls(results[0])
 
     @staticmethod
     def validate_registration(data):
