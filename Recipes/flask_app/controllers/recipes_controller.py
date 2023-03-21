@@ -23,6 +23,8 @@ def create_recipe():
           "name": request.form['recipe_name'],
           "description": request.form['recipe_description'],
           "instructions": request.form['recipe_instructions'],
+          "date_cooked": request.form['recipe_date_cooked'],
+
           "user_id": session['user_id']
      }
      print(new_recipe)
@@ -67,7 +69,13 @@ def edit_recipe(id):
      return redirect('/recipes')
 
 
-
+@app.route('/recipe/remove/<int:id>', methods=['POST'])
+def remove_recipe(id):
+     delete_recipe = {
+          "id": id
+     }
+     Recipe.delete_one(delete_recipe)
+     return redirect('/recipes')
 
 """
 Method: GET
