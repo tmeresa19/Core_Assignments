@@ -53,12 +53,6 @@ def process_login():
             return redirect("/")
     else:
         return redirect("/")
-    
-@app.route('/logout', methods = ['POST'])
-def process_logout():
-    session.clear()
-    return redirect('/')
-    
 
 
 """

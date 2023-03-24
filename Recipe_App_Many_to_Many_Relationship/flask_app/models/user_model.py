@@ -12,6 +12,13 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        #self.recipes = []
+
+
+# 1. In the User model, add a new attribute called "recipes" which is a list that will contain all the recipes associated with that user. 
+
+# 2. Also, add a new method called "get_recipes" that will query the database for all the recipes associated with the user.
+
 
     @classmethod
     def get_one_by_email(cls, data, option):
@@ -34,6 +41,8 @@ class User:
                 flash("Wrong credentials", "password_login_error")
                 return False
 
+# 3.  In the User model, update the "create_one" method to also insert a row into the "user_recipe" table, linking the new user to any recipes they created.
+
     @classmethod
     def create_one(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password)"
@@ -41,6 +50,8 @@ class User:
 
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
+    
+# 4.In the User model, update the "get_all_with_user" method to also fetch all the recipes associated with each user, using the new "get_recipes" method.
 
     @staticmethod
     def validate_registration(data):
