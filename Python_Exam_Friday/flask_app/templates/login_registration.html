@@ -21,7 +21,7 @@
   </div>
   <div class="row">
     <div class="col-6 d-flex-col align-items-center p-5">
-      <h1 class="bg-primary p-3 text-white">
+      <h1>
         Registration
       </h1>
       <form action="/user/new" method="POST">
@@ -75,13 +75,13 @@
           </div>
           {% endfor %}
         </div>
-        <button type="submit" class="btn btn-success mt-3">
+        <button type="submit">
           Submit
         </button>
       </form>
     </div>
     <div class="col-6 d-flex-col align-items-center p-5">
-      <h1 class="bg-success p-3 text-white">
+      <h1>
         Login
       </h1>
       <form action="/login" method="POST">
@@ -102,7 +102,7 @@
           {{ message }}
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-success mt-3">
+        <button type="submit">
           Submit
         </button>
       </form>

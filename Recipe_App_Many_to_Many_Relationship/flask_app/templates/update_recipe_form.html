@@ -22,7 +22,7 @@
             Back to recipes
           </button>
         </form>
-        <form action="" method="POST">
+        <form action="/logout" method="POST">
           <button class="btn btn-secondary">
             Logout
           </button>
@@ -47,7 +47,7 @@
             <label for="description">
               Description:
             </label>
-            <textarea class="form-control" id="description" name="description"> {{current_recipe.description}}" </textarea>
+            <textarea class="form-control" id="description" name="description"> {{current_recipe.description}}"</textarea>
             {% for message in get_flashed_messages( category_filter = ['error_description'] ) %}
             <div class="alert alert-danger mt-3">
               {{ message }}
@@ -58,7 +58,7 @@
             <label for="instructions">
               Instructions:
             </label>
-            <textarea class="form-control" id="instructions" name="instructions"> {{current_recipe.instructions}}" </textarea>
+            <textarea class="form-control" id="instructions" name="instructions"> {{current_recipe.instructions}}"</textarea>
             {% for message in get_flashed_messages( category_filter = ['error_instructions'] ) %}
             <div class="alert alert-danger mt-3">
               {{ message }}

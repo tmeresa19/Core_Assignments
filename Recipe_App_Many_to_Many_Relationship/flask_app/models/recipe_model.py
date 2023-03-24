@@ -19,10 +19,6 @@ class Recipe:
         
         #1. self.users_who_favorited = []
         self.users_who_favorited = []
-        
-    # 2. In the Recipe model, add a new attribute called "users" which is a list that will contain all the users associated with that recipe. 
-    
-    # 3. Also, add a new method called "get_users" that will query the database for all the users associated with the recipe. 
     
     @classmethod
     def get_one (cls, data):
@@ -33,20 +29,16 @@ class Recipe:
         result = connectToMySQL(DATABASE).query_db(query, data)
         return cls(result[0])
     
-    # 4. In the Recipe model, update the "create_one" method to also insert a row into the "user_recipe" table, linking the new recipe to the user who created it.
-    
     @classmethod
     def create_one(cls, data):
         query = "INSERT INTO recipes(name, description, instructions, date_cooked, under_thirty, user_id ) "
         query += "VALUES(%(name)s, %(description)s, %(instructions)s, %(date_cooked)s, %(under_thirty)s, %(user_id)s );"
         
         result = connectToMySQL(DATABASE).query_db(query, data )
-        #INSERT doesn't throw any list. So, we won't need to send this result back.
+        #INSERT and UPDATE don't throw any list. So, we won't need to send this result back.
         #But, if there's an issue with the query, we could possibly print result to see what could be wrong
         print(result)
         return result
-    
-    # 5. In the Recipe model, update the "get_all_with_user" method to also fetch all the users associated with each recipe, using the new "get_users" method.
     
     @classmethod
     def get_all_with_user(cls):
@@ -73,6 +65,28 @@ class Recipe:
             list_of_recipes.append(current_recipe)
         return list_of_recipes 
     
+    @classmethod
+    def get_one_with_user(cls, data):
+        query = "SELECT * "
+        query += "FROM recipes r "
+        query += "JOIN users u ON r.user_id = u.id "
+        query+= "WHERE r.id = %(id)s; "
+        
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        row = result[0]
+        current_recipe = cls(result[0])
+        data_for_user = {
+            "id": row['u.id'],
+            "first_name": row['first_name'],
+            "last_name": row['last_name'],
+            "email": row['email'],
+            "created_at": row['created_at'],
+            "updated_at": row['updated_at'],
+            "password": row['password']
+        }
+        current_recipe.owner=User(data_for_user)
+        return current_recipe
+        
     @classmethod
     def delete_one(cls, data):
         query = "DELETE FROM recipes "
