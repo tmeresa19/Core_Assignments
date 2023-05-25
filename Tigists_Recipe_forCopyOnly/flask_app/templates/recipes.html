@@ -25,19 +25,20 @@
       </div>
     </div>
     <div class="d-flex col-2 mt-5">
-      <form action="/recipes/new" method="GET">
-        <button>
+      <form action="" method="POST">
+        <button class="btn btn-primary">
           + Create
         </button>
       </form>
     </div>
     <div class="d-flex col-2 mt-5">
       <form action="/logout" method="POST">
-        <button>
+        <button class="btn btn-secondary">
           Logout
         </button>
       </form>
     </div>
+  </div>
   <div class="row">
     <table class="table table-striped">
       <thead>
@@ -56,59 +57,44 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        {% for recipe in list_of_recipes: %}
+      <!-- <tbody>
+        {% for todo in list_of_todos: %}
         <tr>
           <td>
-            {{ recipe.name }}
-          </td>
-          <!-- <td>
-              {{ recipe.under_thirty}}
-            </td> -->
-          <td>
-            <!-- for posted by -->
-            {% if recipe.under_thirty == 0: %}
-            No
-            {% else: %}
-            Yes
-            {% endif%}
-  
+            {{ todo.name }} - {{ todo.status }}
           </td>
           <td>
-            {{ recipe.owner.first_name }}
-          </td>
-          <td>
-            
-            <form action="/recipes/{{recipe.id}}" method="GET">
-              <button type="submit">
-                View recipe
-              </button>
-            </form>
-
-            <!-- users who didn't create the recipe shouldn't see the delete and edit buttons so need to add those validations here -->
-            <!-- recipe owner user_id matches .....session to display edit and delete buttons-->
-
-            {% if recipe.owner.id == session['user_id']: %}
-
-            <form action = "/recipes/edit/{{recipe.id}}" method="GET">
-              <button type="submit">
+            <form action="/todo/edit_form/{{todo.id}}" method="GET">
+              <button type="submit" class="btn btn-primary">
                 Edit
               </button>
             </form>
-            <form action="/recipe/delete/{{recipe.id}}" method="POST">
-              <button type="submit">
+          </td>
+          <td>
+            <form action="/todo/remove/{{todo.id}}" method="POST">
+              <button type="submit" class="btn btn-danger">
                 Delete
               </button>
             </form>
-            {% endif %}
-
           </td>
         </tr>
         {% endfor %}
-      </tbody>
+      </tbody> -->
     </table>
   </div>
-  </div>  
+  <!-- <div class="row">
+    <form action="/todo/form" method="GET" class="col-1">
+      <button type="submit" class="btn btn-success">
+        Add todo
+      </button>
+    </form>
+    <form action="/user/{{session['user_id']}}" method="GET" class="col-1">
+      <button type="submit" class="btn btn-info">
+        My todos
+      </button>
+    </form>
+  </div> -->
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 </body>
 

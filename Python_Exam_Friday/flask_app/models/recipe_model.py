@@ -18,7 +18,7 @@ class Recipe:
         #self.owner is not a list, but just one single user. That means, the user who created the recipe 
         
         #1. self.users_who_favorited = []
-        self.users_who_favorited = []
+        # self.users_who_favorited = []
     
     @classmethod
     def get_one (cls, data):
